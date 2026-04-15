@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { primaryNav } from "@/lib/nav";
 import { LEGACY_SITE_URL, site } from "@/lib/site";
 
 const highlights = [
@@ -59,6 +60,32 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-20">
+        <h2 className="font-display text-2xl font-semibold text-[var(--sl-ink)] sm:text-3xl">
+          Explore
+        </h2>
+        <p className="mt-3 max-w-2xl text-[var(--sl-muted)]">
+          Core pages for the refresh — copy and art direction will tighten when
+          Stitch designs land.
+        </p>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {primaryNav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] p-5 transition-colors hover:border-[var(--sl-muted)]"
+            >
+              <span className="font-display text-lg font-semibold text-[var(--sl-ink)]">
+                {item.label}
+              </span>
+              <span className="mt-2 block text-sm text-[var(--sl-muted)]">
+                View page
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-20">
         <h2 className="font-display text-2xl font-semibold text-[var(--sl-ink)] sm:text-3xl">
           Why visit us first
         </h2>

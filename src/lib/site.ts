@@ -9,7 +9,25 @@ export const site = {
   phoneDisplay: null as string | null,
   /** City/region line for footer + SEO locality hint. */
   region: "Pacific Northwest",
+  showroom: {
+    name: "Seasonally Living by Chim Chimney",
+    addressLine1: "1407 Maiden Ln",
+    city: "Wenatchee",
+    state: "WA",
+    postalCode: "98801",
+    note: "Next to Home Depot",
+  },
 } as const;
+
+export function getShowroomAddressBlock(): string {
+  const s = site.showroom;
+  return `${s.addressLine1}, ${s.city}, ${s.state} ${s.postalCode}`;
+}
+
+export function getGoogleMapsPlaceUrl(): string {
+  const q = encodeURIComponent(`${site.showroom.name} ${getShowroomAddressBlock()}`);
+  return `https://www.google.com/maps/search/?api=1&query=${q}`;
+}
 
 /**
  * Canonical site URL for metadata, sitemap, and OG.

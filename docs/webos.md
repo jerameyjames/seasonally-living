@@ -18,3 +18,5 @@
 5. Mark site launch complete in WebOS → then schedule Campaign 01 against frozen CTAs.
 
 **Vercel env:** set `NEXT_PUBLIC_SITE_URL` to the stable public URL (Vercel alias or production domain) so metadata, `sitemap.xml`, and Open Graph resolve correctly. Add scheduler + form URLs when ready.
+
+**Stitch:** visual system + screen work lives in Stitch; map tokens into `src/styles/stitch-tokens.css` / `--sl-*` variables. See `docs/stitch.md`.

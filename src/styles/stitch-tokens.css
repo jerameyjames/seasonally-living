@@ -1,0 +1,11 @@
+/*
+ * Stitch → CSS bridge (optional)
+ *
+ * When your Stitch project is ready:
+ * 1. Export / copy design tokens (DTCG JSON) or theme values from Stitch.
+ * 2. Map them to CSS custom properties here, OR reassign the --sl-* tokens in globals.css.
+ *
+ * Tip: keep semantic names (--sl-accent, --sl-ink) stable so pages need fewer edits.
+ *
+ * See docs/stitch.md for MCP workflow (get_project, list_design_systems, apply_design_system).
+ */

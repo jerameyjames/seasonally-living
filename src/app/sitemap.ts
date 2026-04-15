@@ -1,12 +1,24 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site";
 
+const staticPaths = [
+  "",
+  "/book",
+  "/showroom",
+  "/hot-tubs",
+  "/fireplaces",
+  "/outdoor-kitchens",
+  "/contact",
+] as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
   const lastModified = new Date();
 
-  return [
-    { url: base, lastModified, changeFrequency: "weekly", priority: 1 },
-    { url: `${base}/book`, lastModified, changeFrequency: "monthly", priority: 0.9 },
-  ];
+  return staticPaths.map((path) => ({
+    url: `${base}${path}`,
+    lastModified,
+    changeFrequency: path === "" ? "weekly" : ("monthly" as const),
+    priority: path === "" ? 1 : 0.85,
+  }));
 }
