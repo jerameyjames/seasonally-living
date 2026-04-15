@@ -6,11 +6,11 @@ type PageShellProps = {
   title: string;
   intro?: ReactNode;
   children?: ReactNode;
-  /** Optional wide photo above the article (Unsplash or other allowed remote). */
+  /** Full-bleed cinematic photo above the article (covers width + strong height). */
   heroImage?: { src: string; alt: string };
 };
 
-/** Shared inner layout — Cascadia Refined floating article on tonal canvas. */
+/** Shared inner layout — optional edge-to-edge hero, article overlaps slightly for depth. */
 export function PageShell({
   eyebrow,
   title,
@@ -18,27 +18,38 @@ export function PageShell({
   children,
   heroImage,
 }: PageShellProps) {
-  const shellPad = heroImage
-    ? "py-10 sm:py-12"
+  const articleWrap = heroImage
+    ? "relative z-10 -mt-8 pb-14 sm:-mt-12 sm:pb-20"
     : "py-14 sm:py-20";
 
   return (
     <>
       {heroImage ? (
-        <div className="mx-auto max-w-6xl px-6 pt-14 sm:pt-20">
-          <div className="overflow-hidden rounded-[1.75rem] border border-[var(--sl-border)] shadow-[var(--sl-shadow-card)]">
-            <MarketingImage
-              src={heroImage.src}
-              alt={heroImage.alt}
-              aspect="banner"
-              sizes="(max-width: 768px) 100vw, 1152px"
-              priority
-            />
+        <section className="relative w-full">
+          <div className="sl-fullbleed">
+            <div className="relative overflow-hidden shadow-[inset_0_-1px_0_color-mix(in_srgb,var(--sl-ink)_6%,transparent)]">
+              <MarketingImage
+                src={heroImage.src}
+                alt={heroImage.alt}
+                aspect="cinematic"
+                sizes="100vw"
+                priority
+                imageClassName="object-cover object-[center_40%] sm:object-center"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[color-mix(in_srgb,var(--sl-ink)_12%,transparent)] via-transparent to-[var(--sl-bg)] sm:from-transparent sm:via-transparent"
+                aria-hidden="true"
+              />
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[var(--sl-bg)] via-[color-mix(in_srgb,var(--sl-bg)_85%,transparent)] to-transparent sm:h-36"
+                aria-hidden="true"
+              />
+            </div>
           </div>
-        </div>
+        </section>
       ) : null}
-      <div className={`mx-auto max-w-3xl px-6 ${shellPad}`}>
-        <article className="rounded-[1.75rem] border border-[var(--sl-border)] bg-[color-mix(in_srgb,var(--sl-surface)_88%,transparent)] px-6 py-10 shadow-[var(--sl-shadow-card)] backdrop-blur-[2px] sm:px-10 sm:py-12 supports-[backdrop-filter]:bg-[color-mix(in_srgb,var(--sl-surface)_78%,transparent)]">
+      <div className={`mx-auto max-w-3xl px-6 ${articleWrap}`}>
+        <article className="rounded-[1.75rem] border border-[var(--sl-border)] bg-[color-mix(in_srgb,var(--sl-surface)_94%,transparent)] px-6 py-10 shadow-[var(--sl-shadow-card)] backdrop-blur-[3px] sm:px-10 sm:py-12 supports-[backdrop-filter]:bg-[color-mix(in_srgb,var(--sl-surface)_88%,transparent)]">
           {eyebrow ? (
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--sl-muted)]">
               {eyebrow}

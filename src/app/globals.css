@@ -51,10 +51,35 @@
   --font-display: var(--font-noto-serif);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background: var(--sl-bg);
   color: var(--sl-ink);
   font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/**
+ * Break out of a centered column to true viewport width (for photography bands).
+ * Parent layout must allow overflow-x hidden on the document (see layout body).
+ */
+.sl-fullbleed {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+@media (min-width: 1024px) {
+  .sl-fullbleed-lg-reset {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .font-display {

@@ -1,11 +1,27 @@
 import Image from "next/image";
 
-type Aspect = "banner" | "card" | "landscape" | "video";
+/** Layout presets tuned so photography fills space confidently without letterboxing. */
+type Aspect =
+  | "banner"
+  | "card"
+  | "cardFeature"
+  | "cinematic"
+  | "coverBand"
+  | "landscape"
+  | "video";
 
 const aspectClass: Record<Aspect, string> = {
+  /** Wide editorial strip — atmosphere bands inside max-width containers */
   banner:
-    "aspect-[21/9] min-h-[180px] max-h-[min(380px,42vh)] sm:min-h-[220px]",
+    "aspect-[21/9] min-h-[220px] max-h-[min(560px,62vh)] sm:min-h-[260px]",
+  /** Default card thumb */
   card: "aspect-[16/10] sm:aspect-[2/1]",
+  /** Explore cards — fixed tall bands so images dominate the card */
+  cardFeature: "h-52 w-full sm:h-60 lg:h-64",
+  /** Inner-page heroes — viewport-relative height, full bleed friendly */
+  cinematic: "h-[clamp(300px,52vh,640px)] w-full",
+  /** Home atmosphere — full-bleed landscape band */
+  coverBand: "h-[clamp(280px,42vh,560px)] w-full",
   landscape: "aspect-[4/3]",
   video: "aspect-video",
 };
@@ -16,7 +32,6 @@ type MarketingImageProps = {
   aspect?: Aspect;
   priority?: boolean;
   className?: string;
-  /** Parent should set rounded-*; default adds overflow clip */
   imageClassName?: string;
   sizes?: string;
 };
@@ -28,7 +43,7 @@ export function MarketingImage({
   priority = false,
   className = "",
   imageClassName = "",
-  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px",
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1400px",
 }: MarketingImageProps) {
   return (
     <div
@@ -40,7 +55,7 @@ export function MarketingImage({
         fill
         sizes={sizes}
         priority={priority}
-        className={`object-cover ${imageClassName}`}
+        className={`object-cover object-center ${imageClassName}`}
       />
     </div>
   );
