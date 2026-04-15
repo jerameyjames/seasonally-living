@@ -17,7 +17,7 @@ export default function HotTubsPage() {
       title="Hot tubs & swim spas"
       intro={
         <>
-          Elevate your backyard with hydrotherapy, year-round soaks, and models
+          Refresh your backyard with hydrotherapy, year-round soaks, and models
           you can see before you buy. We&apos;ll match you to the right size,
           jet layout, and efficiency for how you actually live.
         </>
@@ -32,7 +32,7 @@ export default function HotTubsPage() {
       <div className="flex flex-col gap-4">
         <Link
           href="/book"
-          className="inline-flex h-12 w-fit items-center justify-center rounded-full bg-[var(--sl-accent)] px-8 text-sm font-semibold text-white transition-colors hover:bg-[var(--sl-accent-hover)]"
+          className="sl-btn-primary inline-flex h-12 min-h-12 w-fit items-center justify-center px-8 text-sm font-semibold"
         >
           Book a visit
         </Link>

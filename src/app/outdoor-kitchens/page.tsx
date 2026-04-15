@@ -32,7 +32,7 @@ export default function OutdoorKitchensPage() {
       <div className="flex flex-col gap-4">
         <Link
           href="/book"
-          className="inline-flex h-12 w-fit items-center justify-center rounded-full bg-[var(--sl-accent)] px-8 text-sm font-semibold text-white transition-colors hover:bg-[var(--sl-accent-hover)]"
+          className="sl-btn-primary inline-flex h-12 min-h-12 w-fit items-center justify-center px-8 text-sm font-semibold"
         >
           Book a visit
         </Link>

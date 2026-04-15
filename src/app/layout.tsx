@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Manrope, Noto_Serif } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getSiteUrl, site } from "@/lib/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const displaySerif = Cormorant_Garamond({
+const notoSerif = Noto_Serif({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display-serif",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-noto-serif",
 });
 
 const siteUrl = getSiteUrl();
@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${displaySerif.variable} h-full scroll-smooth antialiased`}
+      className={`${manrope.variable} ${geistMono.variable} ${notoSerif.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <SiteHeader />

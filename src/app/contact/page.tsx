@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
+import { ReachOut } from "@/components/reach-out";
 import {
   LEGACY_SITE_URL,
   getGoogleMapsPlaceUrl,
@@ -10,7 +11,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${site.name} — showroom in Wenatchee, WA. Book a visit or reach the team.`,
+  description: `Contact ${site.name} — showroom in Wenatchee, WA. Call, email, or book a visit.`,
 };
 
 export default function ContactPage() {
@@ -20,13 +21,14 @@ export default function ContactPage() {
       title="Contact us"
       intro={
         <>
-          The fastest way to get help is to book a showroom visit. For general
-          questions, use the legacy contact paths until this page is wired to
-          your preferred form or phone tree.
+          The fastest path is a quick call or email — we&apos;ll help you decide
+          whether a showroom visit makes sense and what to bring.
         </>
       }
     >
-      <div className="rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] p-6">
+      <ReachOut emailSubject="Question for Seasonally Living" />
+
+      <div className="rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface-warm)]/50 p-6">
         <p className="font-medium text-[var(--sl-ink)]">Showroom</p>
         <p className="mt-2 text-[var(--sl-muted)]">{site.showroom.name}</p>
         <p className="mt-1 text-[var(--sl-muted)]">{getShowroomAddressBlock()}</p>
@@ -43,24 +45,19 @@ export default function ContactPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <Link
           href="/book"
-          className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--sl-accent)] px-8 text-sm font-semibold text-white transition-colors hover:bg-[var(--sl-accent-hover)]"
+          className="sl-btn-primary inline-flex h-12 min-h-12 w-fit items-center justify-center px-8 text-sm font-semibold"
         >
-          Book a visit
+          Plan a visit
         </Link>
         <a
           href={LEGACY_SITE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-12 items-center justify-center rounded-full border border-[var(--sl-border)] bg-[var(--sl-surface)] px-8 text-sm font-medium text-[var(--sl-ink)] transition-colors hover:border-[var(--sl-muted)]"
+          className="sl-btn-secondary inline-flex h-12 min-h-12 w-fit items-center justify-center px-8 text-sm font-medium"
         >
-          Open current site
+          Current site
         </a>
       </div>
-
-      <p className="text-sm text-[var(--sl-muted)]">
-        <strong className="text-[var(--sl-ink)]">TODO:</strong> add public
-        phone and monitored inbox when approved.
-      </p>
     </PageShell>
   );
 }

@@ -2,9 +2,17 @@
 
 This site is structured so **Stitch** can own the visual refresh while routes and copy stay in Next.js.
 
-## What to send next
+## Active project (wired)
 
-- **Stitch project resource name** in the form `projects/{numericId}` (same ID works with MCP as `{numericId}` only for some tools — follow the tool schema).
+| Field | Value |
+|-------|--------|
+| Title | Seasonally Living |
+| Project resource name | `projects/13771544954940531085` |
+| Numeric `projectId` | `13771544954940531085` |
+| Design system | **Cascadia Refined** |
+| `assetId` (for `stitch__apply_design_system`, no `assets/` prefix) | `6269b0f19bc94dc5960be1285e8f62af` |
+
+Canonical constants: `src/lib/stitch.ts`.
 
 ## MCP tools (user-mcpx)
 
@@ -34,4 +42,5 @@ Use **`get_project`** output (`screenInstances`, `designTheme`, etc.) to decide 
 
 ## Repo env (optional)
 
-- `STITCH_PROJECT_ID` — document the active project id for humans/agents (not required for runtime).
+- `STITCH_PROJECT_ID` — `13771544954940531085` (humans/agents; not required at runtime).
+- `STITCH_DESIGN_SYSTEM_ASSET_ID` — `6269b0f19bc94dc5960be1285e8f62af` (optional; for MCP scripts).

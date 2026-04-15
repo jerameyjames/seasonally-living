@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { LEGACY_SITE_URL, site } from "@/lib/site";
+import { LEGACY_SITE_URL, site, hasContactChannels } from "@/lib/site";
 import { primaryNav } from "@/lib/nav";
+import { ReachOut } from "@/components/reach-out";
 
 export function SiteFooter() {
+  const showContact = hasContactChannels();
+
   return (
     <footer className="mt-auto border-t border-[var(--sl-border)] bg-[var(--sl-surface-warm)]">
       <div className="mx-auto max-w-6xl px-6 py-14">
@@ -42,7 +45,7 @@ export function SiteFooter() {
                   href="/book"
                   className="text-[var(--sl-muted)] transition-colors hover:text-[var(--sl-accent)]"
                 >
-                  Book a showroom appointment
+                  Plan a showroom visit
                 </Link>
               </li>
               <li>
@@ -52,7 +55,7 @@ export function SiteFooter() {
                   rel="noopener noreferrer"
                   className="text-[var(--sl-muted)] transition-colors hover:text-[var(--sl-accent)]"
                 >
-                  Browse current seasonallyliving.com
+                  Browse seasonallyliving.com
                 </a>
               </li>
               <li>
@@ -66,7 +69,19 @@ export function SiteFooter() {
             </ul>
           </div>
         </div>
-        <p className="mt-12 text-xs text-[var(--sl-muted)]/70">
+
+        {showContact ? (
+          <div className="mt-12 rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] px-5 py-5 shadow-[var(--sl-shadow-card)] sm:px-8 sm:py-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sl-muted)]">
+              Reach us
+            </p>
+            <div className="mt-3">
+              <ReachOut variant="footer" />
+            </div>
+          </div>
+        ) : null}
+
+        <p className="mt-12 text-xs text-[var(--sl-muted)]/80">
           © {new Date().getFullYear()} {site.name}. Serving {site.region}.
         </p>
       </div>

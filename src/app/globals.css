@@ -2,28 +2,53 @@
 @import "../styles/stitch-tokens.css";
 
 :root {
-  --sl-bg: #f6f4ef;
-  --sl-surface: #fbfaf7;
-  --sl-surface-warm: #f0ebe3;
-  --sl-ink: #1e1b18;
-  --sl-muted: #5c5650;
-  --sl-accent: #4a5d4e;
-  --sl-accent-hover: #3d4f41;
-  --sl-border: rgba(30, 27, 24, 0.12);
+  /* Semantic map → Stitch Cascadia Refined */
+  --sl-primary: #172c24;
+  --sl-primary-container: #2d4239;
+  --sl-on-primary: #ffffff;
+  --sl-bg: #f9f9f8;
+  --sl-surface: #ffffff;
+  --sl-surface-warm: #f3f4f3;
+  --sl-surface-tonal: #edeeed;
+  --sl-ink: #191c1c;
+  --sl-muted: #424845;
+  --sl-accent: var(--sl-primary);
+  --sl-accent-hover: var(--sl-primary-container);
+  --sl-border: color-mix(in srgb, #c2c8c3 22%, transparent);
+  --sl-border-strong: color-mix(in srgb, #727873 35%, transparent);
+  --sl-shadow-card: var(--st-shadow-lift), var(--st-shadow-ambient);
+  --sl-shadow-card-hover: 0 1px 0 color-mix(in srgb, var(--sl-ink) 6%, transparent),
+    0 28px 70px -32px color-mix(in srgb, var(--sl-primary) 22%, transparent);
   --sl-hero-wash: linear-gradient(
     165deg,
-    #e8e2d8 0%,
-    #f6f4ef 42%,
-    #fbfaf7 100%
+    #edeeed 0%,
+    #f9f9f8 48%,
+    #f3f4f3 100%
   );
+  --sl-hero-sheen: linear-gradient(
+    125deg,
+    color-mix(in srgb, #172c24 6%, transparent) 0%,
+    transparent 42%,
+    color-mix(in srgb, #2d4239 5%, transparent) 100%
+  );
+  --sl-hero-panel: radial-gradient(
+      120% 80% at 100% 0%,
+      color-mix(in srgb, #2d4239 12%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, #d6e7dd 55%, transparent) 0%,
+      color-mix(in srgb, #f9f9f8 90%, transparent) 100%
+    );
 }
 
 @theme inline {
   --color-background: var(--sl-bg);
   --color-foreground: var(--sl-ink);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-display-serif);
+  --font-display: var(--font-noto-serif);
 }
 
 body {
@@ -33,5 +58,105 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-display), ui-serif, Georgia, "Times New Roman", serif;
+  font-family: var(--font-display), ui-serif, serif;
+}
+
+/* Home hero: atmospheric wash + subtle primary sheen (Stitch designMd) */
+.sl-hero-surface {
+  background-image: var(--sl-hero-sheen), var(--sl-hero-wash);
+  background-blend-mode: normal, normal;
+}
+
+.sl-hero-panel {
+  background: var(--sl-hero-panel);
+  border: 1px solid var(--sl-border);
+  box-shadow: var(--sl-shadow-card);
+}
+
+.sl-btn-primary {
+  border-radius: 0.65rem;
+  background: var(--sl-accent);
+  color: var(--sl-on-primary);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--sl-ink) 12%, transparent);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.sl-btn-primary:hover {
+  background: var(--sl-accent-hover);
+}
+.sl-btn-primary:active {
+  transform: translateY(1px);
+}
+
+.sl-btn-secondary {
+  border-radius: 0.65rem;
+  border: 1px solid var(--sl-border);
+  background: var(--sl-surface);
+  color: var(--sl-ink);
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    transform 0.2s ease;
+}
+.sl-btn-secondary:hover {
+  border-color: var(--sl-border-strong);
+  background: color-mix(in srgb, var(--sl-surface-warm) 80%, var(--sl-surface));
+}
+.sl-btn-secondary:active {
+  transform: translateY(1px);
+}
+
+.sl-input {
+  border-radius: 0.65rem;
+  border: 1px solid var(--sl-border);
+  background: var(--sl-surface);
+  color: var(--sl-ink);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.sl-input::placeholder {
+  color: color-mix(in srgb, var(--sl-muted) 55%, transparent);
+}
+.sl-input:focus {
+  border-color: color-mix(in srgb, var(--sl-primary) 35%, var(--sl-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-primary) 12%, transparent);
+}
+
+@keyframes sl-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sl-animate-hero > * {
+  animation: sl-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.sl-animate-hero > *:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.sl-animate-hero > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.sl-animate-hero > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.sl-animate-hero > *:nth-child(4) {
+  animation-delay: 0.22s;
+}
+.sl-animate-hero > *:nth-child(5) {
+  animation-delay: 0.28s;
+}
+.sl-animate-hero > *:nth-child(6) {
+  animation-delay: 0.34s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-animate-hero > * {
+    animation: none;
+  }
 }

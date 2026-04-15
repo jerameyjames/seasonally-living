@@ -5,8 +5,6 @@ export const site = {
   name: "Seasonally Living",
   description:
     "Outdoor living, hot tubs, and showroom experiences in the Pacific Northwest.",
-  /** Shown in footer; replace with store line when ready. */
-  phoneDisplay: null as string | null,
   /** City/region line for footer + SEO locality hint. */
   region: "Pacific Northwest",
   showroom: {
@@ -42,4 +40,51 @@ export function getSiteUrl(): string {
     return `https://${host}`;
   }
   return "http://localhost:3040";
+}
+
+function readPublicEnv(name: string): string | undefined {
+  const v = process.env[name]?.trim();
+  return v && v.length > 0 ? v : undefined;
+}
+
+/** Display string, e.g. (509) 662-0123 — from NEXT_PUBLIC_CONTACT_PHONE */
+export function getContactPhoneDisplay(): string | undefined {
+  return readPublicEnv("NEXT_PUBLIC_CONTACT_PHONE");
+}
+
+/**
+ * tel: href — use NEXT_PUBLIC_CONTACT_PHONE_TEL for E.164 (e.g. +15096620123),
+ * else derived from display digits when possible.
+ */
+export function getContactPhoneTelHref(): string | undefined {
+  const direct = readPublicEnv("NEXT_PUBLIC_CONTACT_PHONE_TEL");
+  if (direct) {
+    const n = direct.replace(/^tel:/i, "");
+    return `tel:${n}`;
+  }
+  const display = getContactPhoneDisplay();
+  if (!display) return undefined;
+  const digits = display.replace(/\D/g, "");
+  if (digits.length === 10) return `tel:+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) return `tel:+${digits}`;
+  if (digits.length >= 10) return `tel:+${digits}`;
+  return `tel:${display.replace(/\s/g, "")}`;
+}
+
+/** From NEXT_PUBLIC_CONTACT_EMAIL */
+export function getContactEmail(): string | undefined {
+  return readPublicEnv("NEXT_PUBLIC_CONTACT_EMAIL");
+}
+
+export function getContactMailtoHref(subject?: string): string | undefined {
+  const email = getContactEmail();
+  if (!email) return undefined;
+  const q = new URLSearchParams();
+  if (subject) q.set("subject", subject);
+  const qs = q.toString();
+  return `mailto:${email}${qs ? `?${qs}` : ""}`;
+}
+
+export function hasContactChannels(): boolean {
+  return Boolean(getContactPhoneDisplay() || getContactEmail());
 }
