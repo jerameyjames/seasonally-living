@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
 import { ReachOut } from "@/components/reach-out";
+import { pageHero } from "@/lib/imagery";
 import {
   LEGACY_SITE_URL,
   getGoogleMapsPlaceUrl,
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <PageShell
+      heroImage={pageHero.contact}
       eyebrow="Hello"
       title="Contact us"
       intro={

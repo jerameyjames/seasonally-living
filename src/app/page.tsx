@@ -1,4 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
+import { MarketingImage } from "@/components/marketing-image";
+import {
+  exploreCardByHref,
+  homeAtmosphere,
+  homeHeroSide,
+} from "@/lib/imagery";
 import { primaryNav } from "@/lib/nav";
 import { LEGACY_SITE_URL, site } from "@/lib/site";
 
@@ -64,15 +71,17 @@ export default function Home() {
                 full product detail until DNS cuts over.
               </p>
             </div>
-            <div
-              className="sl-hero-panel sl-animate-hero relative min-h-[220px] overflow-hidden rounded-[1.75rem] lg:col-span-5 lg:min-h-[340px]"
-              aria-hidden="true"
-            >
-              <div className="absolute inset-0 opacity-[0.35]">
-                <div className="absolute -right-8 -top-8 h-48 w-48 rounded-full bg-[color-mix(in_srgb,var(--sl-primary)_12%,transparent)] blur-2xl" />
-                <div className="absolute -bottom-12 left-4 h-56 w-56 rounded-full bg-[color-mix(in_srgb,#b1ccc0_35%,transparent)] blur-2xl" />
-              </div>
-              <div className="relative flex h-full flex-col justify-end p-8">
+            <div className="sl-animate-hero relative min-h-[220px] overflow-hidden rounded-[1.75rem] border border-[var(--sl-border)] shadow-[var(--sl-shadow-card)] lg:col-span-5 lg:min-h-[340px]">
+              <Image
+                src={homeHeroSide.src}
+                alt={homeHeroSide.alt}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--sl-bg)] via-[color-mix(in_srgb,var(--sl-bg)_50%,transparent)] to-[color-mix(in_srgb,var(--sl-bg)_15%,transparent)]" />
+              <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-end p-8">
                 <p className="font-display text-lg font-medium leading-snug text-[var(--sl-primary)]">
                   Wenatchee showroom — next to Home Depot.
                 </p>
@@ -97,32 +106,65 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
-          {primaryNav.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`group rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] p-6 shadow-[var(--sl-shadow-card)] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--sl-muted)_28%,var(--sl-border))] hover:shadow-[var(--sl-shadow-card-hover)] motion-reduce:transform-none motion-reduce:transition-colors ${exploreSpanClass(i)}`}
-            >
-              <span className="font-display text-lg font-semibold tracking-tight text-[var(--sl-ink)] group-hover:text-[var(--sl-primary)]">
-                {item.label}
-              </span>
-              <span className="mt-3 block text-sm text-[var(--sl-muted)]">
-                View page
-              </span>
-            </Link>
-          ))}
+          {primaryNav.map((item, i) => {
+            const shot = exploreCardByHref[item.href];
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`group flex flex-col overflow-hidden rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] shadow-[var(--sl-shadow-card)] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--sl-muted)_28%,var(--sl-border))] hover:shadow-[var(--sl-shadow-card-hover)] motion-reduce:transform-none motion-reduce:transition-colors ${exploreSpanClass(i)}`}
+              >
+                {shot ? (
+                  <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[2/1]">
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                    />
+                  </div>
+                ) : null}
+                <div className="flex flex-1 flex-col p-6">
+                  <span className="font-display text-lg font-semibold tracking-tight text-[var(--sl-ink)] group-hover:text-[var(--sl-primary)]">
+                    {item.label}
+                  </span>
+                  <span className="mt-3 block text-sm text-[var(--sl-muted)]">
+                    View page
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-20">
+      <section className="border-y border-[var(--sl-border)] bg-[var(--sl-surface-warm)]/40 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="overflow-hidden rounded-[1.75rem] border border-[var(--sl-border)] shadow-[var(--sl-shadow-card)]">
+            <MarketingImage
+              src={homeAtmosphere.src}
+              alt={homeAtmosphere.alt}
+              aspect="banner"
+              sizes="(max-width: 768px) 100vw, 1200px"
+            />
+          </div>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--sl-muted)]">
+            Built for long summers and real winters — we help you choose outdoor
+            pieces that feel right for North Central Washington.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-20">
         <h2 className="font-display text-2xl font-semibold text-[var(--sl-ink)] sm:text-3xl">
           Why visit us first
         </h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {highlights.map((item, i) => (
+          {highlights.map((item) => (
             <div
               key={item.title}
-              className={`rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] p-6 shadow-[var(--sl-shadow-card)] ${i === 0 ? "lg:row-span-1" : ""}`}
+              className="rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] p-6 shadow-[var(--sl-shadow-card)]"
             >
               <h3 className="font-display text-lg font-semibold text-[var(--sl-ink)]">
                 {item.title}

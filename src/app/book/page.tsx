@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
 import { ReachOut } from "@/components/reach-out";
+import { pageHero } from "@/lib/imagery";
 import { LEGACY_SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function BookPage() {
 
   return (
     <PageShell
+      heroImage={pageHero.book}
       eyebrow="Showroom"
       title="Plan a visit"
       intro={

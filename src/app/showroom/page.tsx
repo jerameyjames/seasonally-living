@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LegacyCta } from "@/components/legacy-cta";
 import { PageShell } from "@/components/page-shell";
+import { pageHero } from "@/lib/imagery";
 import { legacy } from "@/lib/legacy-routes";
 import {
   getGoogleMapsPlaceUrl,
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 export default function ShowroomPage() {
   return (
     <PageShell
+      heroImage={pageHero.showroom}
       eyebrow="Visit us"
       title="Our showroom"
       intro={

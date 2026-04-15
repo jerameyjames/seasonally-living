@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LEGACY_SITE_URL, site, hasContactChannels } from "@/lib/site";
 import { primaryNav } from "@/lib/nav";
+import { PhotoCredit } from "@/components/photo-credit";
 import { ReachOut } from "@/components/reach-out";
 
 export function SiteFooter() {
@@ -81,9 +82,12 @@ export function SiteFooter() {
           </div>
         ) : null}
 
-        <p className="mt-12 text-xs text-[var(--sl-muted)]/80">
-          © {new Date().getFullYear()} {site.name}. Serving {site.region}.
-        </p>
+        <div className="mt-12 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+          <PhotoCredit />
+          <p className="text-xs text-[var(--sl-muted)]/80">
+            © {new Date().getFullYear()} {site.name}. Serving {site.region}.
+          </p>
+        </div>
       </div>
     </footer>
   );

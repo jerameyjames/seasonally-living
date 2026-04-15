@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LegacyCta } from "@/components/legacy-cta";
 import { PageShell } from "@/components/page-shell";
+import { pageHero } from "@/lib/imagery";
 import { legacy } from "@/lib/legacy-routes";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function FireplacesPage() {
   return (
     <PageShell
+      heroImage={pageHero.fireplaces}
       eyebrow="Hearth"
       title="Fireplaces & stoves"
       intro={

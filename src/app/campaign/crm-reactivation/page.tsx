@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
 import { ReachOut } from "@/components/reach-out";
+import { pageHero } from "@/lib/imagery";
 import { LEGACY_SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function CrmReactivationCampaignPage() {
   return (
     <PageShell
+      heroImage={pageHero.campaign}
       eyebrow="For recent customers"
       title="We saved you a spot in the showroom"
       intro={
