@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LEGACY_SITE_URL, site } from "@/lib/site";
+import { LEGACY_SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Book a showroom visit · ${site.name}`,
+  title: "Book a showroom visit",
   description:
-    "Schedule a showroom appointment — primary CTA for Seasonally Living campaigns.",
+    "Schedule a showroom appointment — primary CTA for Seasonally Living.",
 };
 
 function getSchedulerUrl() {
@@ -23,73 +23,78 @@ export default function BookPage() {
   const leadFormUrl = getLeadFormUrl();
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+    <div className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
+      <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--sl-muted)]">
         Showroom
       </p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
+      <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight text-[var(--sl-ink)]">
         Book a visit
       </h1>
-      <p className="mt-4 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-        Reserve time at the showroom. This page is the campaign primary CTA
-        destination; wire your scheduler and fallback form via environment
-        variables for production.
+      <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--sl-muted)]">
+        Reserve time with our team. Bring measurements, photos of your space,
+        and questions — we&apos;ll help you narrow options fast.
       </p>
 
-      <ul className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <ul className="mt-12 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
         {schedulerUrl ? (
           <li>
             <a
               href={schedulerUrl}
-              className="inline-flex h-12 items-center justify-center rounded-full bg-foreground px-8 text-sm font-medium text-background transition-opacity hover:opacity-90"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--sl-accent)] px-8 text-sm font-semibold text-white transition-colors hover:bg-[var(--sl-accent-hover)]"
             >
               Open scheduler
             </a>
           </li>
         ) : (
-          <li className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
-            Set{" "}
-            <code className="rounded bg-black/5 px-1 py-0.5 text-xs dark:bg-white/10">
+          <li className="max-w-lg rounded-2xl border border-amber-200/80 bg-amber-50 px-5 py-4 text-sm text-amber-950">
+            <strong className="font-semibold">Next step for launch:</strong> set{" "}
+            <code className="rounded bg-amber-100/80 px-1.5 py-0.5 text-xs">
               NEXT_PUBLIC_SCHEDULER_URL
             </code>{" "}
-            to enable the primary button.
+            in Vercel so this button goes live.
           </li>
         )}
         {leadFormUrl ? (
           <li>
             <a
               href={leadFormUrl}
-              className="inline-flex h-12 items-center justify-center rounded-full border border-black/15 px-8 text-sm font-medium dark:border-white/20"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-[var(--sl-border)] bg-[var(--sl-surface)] px-8 text-sm font-medium text-[var(--sl-ink)] transition-colors hover:border-[var(--sl-muted)]"
             >
-              Request a call back (form)
+              Request a call back
             </a>
           </li>
         ) : (
-          <li className="text-sm text-zinc-500">
-            Optional:{" "}
-            <code className="rounded bg-black/5 px-1 py-0.5 text-xs dark:bg-white/10">
-              NEXT_PUBLIC_LEAD_FORM_URL
-            </code>{" "}
-            for form fallback.
+          <li className="flex items-center text-sm text-[var(--sl-muted)]">
+            <span>
+              Optional form fallback:{" "}
+              <code className="rounded bg-[var(--sl-surface-warm)] px-1.5 py-0.5 text-xs">
+                NEXT_PUBLIC_LEAD_FORM_URL
+              </code>
+            </span>
           </li>
         )}
       </ul>
 
-      <p className="mt-12 text-sm text-zinc-500 dark:text-zinc-400">
-        Need the previous site while we migrate content?{" "}
-        <a
-          href={LEGACY_SITE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium text-foreground underline-offset-4 hover:underline"
-        >
-          Open current seasonallyliving.com
-        </a>
-        {" · "}
-        <Link href="/" className="font-medium hover:underline">
-          Home
-        </Link>
-      </p>
+      <div className="mt-14 rounded-2xl border border-[var(--sl-border)] bg-[var(--sl-surface)] p-6">
+        <p className="text-sm leading-relaxed text-[var(--sl-muted)]">
+          Prefer the current site while we migrate?{" "}
+          <a
+            href={LEGACY_SITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[var(--sl-accent)] underline-offset-4 hover:underline"
+          >
+            Open seasonallyliving.com
+          </a>
+          <span className="text-[var(--sl-border)]"> · </span>
+          <Link
+            href="/"
+            className="font-medium text-[var(--sl-accent)] underline-offset-4 hover:underline"
+          >
+            Home
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

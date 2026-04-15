@@ -3,26 +3,26 @@ import { LEGACY_SITE_URL, site } from "@/lib/site";
 
 export function SiteHeader() {
   return (
-    <header className="border-b border-black/10 bg-white/80 backdrop-blur-sm dark:border-white/10 dark:bg-black/80">
-      <div className="mx-auto flex h-14 max-w-3xl items-center justify-between gap-4 px-6">
+    <header className="sticky top-0 z-50 border-b border-[var(--sl-border)] bg-[var(--sl-surface)]/90 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6">
         <Link
           href="/"
-          className="text-sm font-semibold tracking-tight text-foreground"
+          className="font-display text-xl font-semibold tracking-tight text-[var(--sl-ink)]"
         >
           {site.name}
         </Link>
-        <nav className="flex items-center gap-4 text-sm text-zinc-600 dark:text-zinc-400">
-          <Link href="/book" className="hover:text-foreground">
+        <nav className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2 text-sm text-[var(--sl-muted)]">
+          <Link
+            href="/book"
+            className="font-medium text-[var(--sl-ink)] transition-colors hover:text-[var(--sl-accent)]"
+          >
             Book a visit
-          </Link>
-          <Link href="/campaign/crm-reactivation" className="hover:text-foreground">
-            Campaign
           </Link>
           <a
             href={LEGACY_SITE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground"
+            className="transition-colors hover:text-[var(--sl-ink)]"
           >
             Current site
           </a>
